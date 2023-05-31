@@ -1,4 +1,4 @@
-package com.example;
+package com.example.service;
 
 import com.example.entity.Article;
 import com.example.repository.ArticleRepository;
@@ -13,5 +13,8 @@ public class ArticleService {
     private ArticleRepository articleRepository;
     public List<Article> article(){
         return articleRepository.findAll();
+    }
+    public Article add(Article article){
+        return articleRepository.save(article);
     }
 }
