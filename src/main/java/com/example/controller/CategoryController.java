@@ -2,16 +2,16 @@ package com.example.controller;
 
 import com.example.dto.request.category.CategoryCreateRequest;
 import com.example.dto.response.category.CategoryResponse;
+import com.example.entity.Category;
 import com.example.mapper.CategoryMapperImpl;
 import com.example.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +26,19 @@ public class CategoryController {
         return categoryService.categories().stream().map(categoryMapper::toDto).toList();
     }
     @PostMapping("/add")
-    public ResponseEntity<CategoryResponse> addCategory(CategoryCreateRequest categoryDto){
+    public ResponseEntity<CategoryResponse> add(@Valid @RequestBody CategoryCreateRequest categoryDto) {
         return new ResponseEntity<>(categoryMapper.toDto(categoryService.add(categoryMapper.fromDto(categoryDto))), HttpStatus.OK);
+    }
+    @PostMapping("/update")
+    public ResponseEntity<CategoryResponse> update(@Valid @RequestBody CategoryCreateRequest categoryDto) {
+        return new ResponseEntity<>(categoryMapper.toDto(categoryService.update(categoryMapper.fromDto(categoryDto))), HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public CategoryResponse findById(@PathVariable Long id){
+        return categoryMapper.toDto(categoryService.findById(id));
+    }
+    @DeleteMapping("/delete/{id}")
+    public void delete (@PathVariable Long id){
+        categoryService.delete(id);
     }
 }
