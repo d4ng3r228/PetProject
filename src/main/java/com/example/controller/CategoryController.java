@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dto.request.category.CategoryCreateRequest;
+import com.example.dto.request.category.CategoryUpdateRequest;
 import com.example.dto.response.category.CategoryResponse;
 import com.example.entity.Category;
 import com.example.mapper.CategoryMapperImpl;
@@ -29,9 +30,9 @@ public class CategoryController {
     public ResponseEntity<CategoryResponse> add(@Valid @RequestBody CategoryCreateRequest categoryDto) {
         return new ResponseEntity<>(categoryMapper.toDto(categoryService.add(categoryMapper.fromDto(categoryDto))), HttpStatus.OK);
     }
-    @PostMapping("/update")
-    public ResponseEntity<CategoryResponse> update(@Valid @RequestBody CategoryCreateRequest categoryDto) {
-        return new ResponseEntity<>(categoryMapper.toDto(categoryService.update(categoryMapper.fromDto(categoryDto))), HttpStatus.OK);
+    @PutMapping("/update")
+    public ResponseEntity<CategoryResponse> update(@Valid @RequestBody CategoryUpdateRequest categoryUpdateDto) {
+        return new ResponseEntity<>(categoryMapper.toDto(categoryService.update(categoryMapper.fromDto(categoryUpdateDto))), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public CategoryResponse findById(@PathVariable Long id){

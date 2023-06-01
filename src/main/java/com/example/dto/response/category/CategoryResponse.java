@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class CategoryResponse {
-    @NotNull(message = "name cannot be null")
+    private Long id;
     private String name;
     private Long topicality;
 }
