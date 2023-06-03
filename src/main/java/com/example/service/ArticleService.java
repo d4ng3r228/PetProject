@@ -6,7 +6,6 @@ import com.example.repository.ArticleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service
@@ -18,7 +17,6 @@ public class ArticleService {
         return articleRepository.findAll();
     }
     public Article add(Article article){
-
         return articleRepository.save(article);
     }
     public Article update (Article article){return articleRepository.save(article);}
